@@ -29,24 +29,24 @@ import java.io.Serializable;
  * @author Tom Crecelius & Martin Theobald
  */
 public abstract class Kernel implements Serializable {
+    private static final long serialVersionUID = -5916664132568865649L;
+    protected Kernel m_kernel;
 
-  protected Kernel m_kernel;
+    protected Kernel() {
+        this.m_kernel = null;
+    }
 
-  protected Kernel() {
-    this.m_kernel = null;
-  }
+    protected Kernel(Kernel nestedKernel) {
+        this.m_kernel = nestedKernel;
+    }
 
-  protected Kernel(Kernel nestedKernel) {
-    this.m_kernel = nestedKernel;
-  }
+    abstract public double evaluate(FeatureVector v1, FeatureVector v2);
 
-  abstract public double evaluate(FeatureVector v1, FeatureVector v2);
+    public Kernel getNestedKernel() {
+        return m_kernel;
+    }
 
-  public Kernel getNestedKernel() {
-    return m_kernel;
-  }
-
-  public void setNestedKernel(Kernel nestedKernel) {
-    m_kernel = nestedKernel;
-  }
+    public void setNestedKernel(Kernel nestedKernel) {
+        m_kernel = nestedKernel;
+    }
 }

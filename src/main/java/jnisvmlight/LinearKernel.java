@@ -28,15 +28,21 @@ package jnisvmlight;
  * @author Tom Crecelius & Martin Theobald
  */
 public class LinearKernel extends Kernel {
+    private static final long serialVersionUID = 9007623109556199221L;
 
-  public double evaluate(FeatureVector fv1, FeatureVector fv2) {
-     double result = 0.0;      
-     int i = 0, j = 0;
-     while (i < fv1.m_dims.length && j < fv2.m_dims.length) {
-       if (fv1.m_dims[i]>fv2.m_dims[j]) j++;
-       else if (fv1.m_dims[i]<fv2.m_dims[j]) i++;
-       else result += (fv1.m_vals[i++] * fv2.m_vals[j++]);
-     }
-     return result;
-   }
+    public double evaluate(FeatureVector fv1, FeatureVector fv2) {
+        double result = 0.0;
+        int i = 0, j = 0;
+        
+        while (i < fv1.m_dims.length && j < fv2.m_dims.length) {
+            if (fv1.m_dims[i] > fv2.m_dims[j]) {
+                j++;
+            } else if (fv1.m_dims[i] < fv2.m_dims[j]) {
+                i++;
+            } else {
+                result += (fv1.m_vals[i++] * fv2.m_vals[j++]);
+            }
+        }
+        return result;
+    }
 }

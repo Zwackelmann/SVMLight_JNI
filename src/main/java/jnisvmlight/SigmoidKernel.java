@@ -28,26 +28,28 @@ package jnisvmlight;
  */
 public class SigmoidKernel extends ExtendedKernel {
 
-  protected SigmoidKernel() {
-    super(new LinearKernel(), 1.0, 0.0);
-  }
+    private static final long serialVersionUID = -263550898168927041L;
 
-  public SigmoidKernel(Kernel nestedKernel, double a, double c) {
-    super(nestedKernel, a, c);
-  }
+    protected SigmoidKernel() {
+        super(new LinearKernel(), 1.0, 0.0);
+    }
 
-  public double evaluate(FeatureVector v1, FeatureVector v2) {
-    return tanh(m_a * m_kernel.evaluate(v1, v2) + m_c);
-  }
+    public SigmoidKernel(Kernel nestedKernel, double a, double c) {
+        super(nestedKernel, a, c);
+    }
 
-  private double tanh(double a) {
-    double x = Math.exp(a);
-    double y = Math.exp(-a);
-    return (x - y) / (x + y);
-  }
+    public double evaluate(FeatureVector v1, FeatureVector v2) {
+        return tanh(m_a * m_kernel.evaluate(v1, v2) + m_c);
+    }
 
-  public String toString() {
-    return "Sigmoid kernel K(x, k) = tanh(" + m_a + ".k(x) + " + m_c + ")"
-        + ". k = " + m_kernel.toString();
-  }
+    private double tanh(double a) {
+        double x = Math.exp(a);
+        double y = Math.exp(-a);
+        return (x - y) / (x + y);
+    }
+
+    public String toString() {
+        return "Sigmoid kernel K(x, k) = tanh(" + m_a + ".k(x) + " + m_c + ")"
+                + ". k = " + m_kernel.toString();
+    }
 }

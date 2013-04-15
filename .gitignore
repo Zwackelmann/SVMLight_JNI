@@ -3,3 +3,6 @@ bin*
 target*
 .classpath
 .project
+build/
+.cache
+SVMLight.dll
